@@ -49,9 +49,7 @@ CREATE TABLE Customer(
     city VARCHAR(50)
 );
 
--- ============================================
--- BOOKING TABLE
--- ============================================
+
 
 CREATE TABLE Booking(
     booking_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -74,9 +72,6 @@ CREATE TABLE Booking(
     REFERENCES Room(room_id)
 );
 
--- ============================================
--- PAYMENT TABLE
--- ============================================
 
 CREATE TABLE Payment(
     payment_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -96,9 +91,7 @@ CREATE TABLE Payment(
     REFERENCES Booking(booking_id)
 );
 
--- ============================================
--- STAFF TABLE
--- ============================================
+
 
 CREATE TABLE Staff(
     staff_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -118,3 +111,100 @@ CREATE TABLE Staff(
     FOREIGN KEY(hotel_id)
     REFERENCES Hotel(hotel_id)
 );
+
+
+-- HOTEL DATA
+
+INSERT INTO Hotel(hotel_name, city, state, phone, email)
+VALUES
+(' shauryawada','Pune','Maharashtra','9876543210','shauya@hotel.com'),
+('jagdamba','kolhapur','Maharashtra','9876543211','jagdmba@hotel.com'),
+('akshay','sinhgad','Maharashtra','9876543212','akshay@hotel.com');
+
+-- ROOM TYPES
+
+INSERT INTO RoomType(type_name, price_per_night)
+VALUES
+('Single',1500),
+('Double',2500),
+('triple',4500),
+('bighall',3000);
+
+
+
+-- ROOMS
+
+INSERT INTO Room(hotel_id, room_number, room_type_id, status)
+VALUES
+(1,'101',1,'Available'),
+(1,'102',2,'Booked'),
+(1,'103',3,'Available'),
+(1,'104',4,'Maintenance'),
+
+(2,'201',1,'Available'),
+(2,'202',2,'Available'),
+(2,'203',3,'Booked'),
+
+(3,'301',1,'Available'),
+(3,'302',2,'Booked'),
+(3,'303',4,'Available');
+
+-- CUSTOMERS
+
+INSERT INTO Customer(first_name,last_name,gender,phone,email,city)
+VALUES
+('Rahul','Sharma','Male','9876500001','rahul@gmail.com','Pune'),
+('Priya','Patil','Female','9876500002','priya@gmail.com','Mumbai'),
+('Amit','Joshi','Male','9876500003','amit@gmail.com','Nagpur'),
+('Sneha','Kulkarni','Female','9876500004','sneha@gmail.com','Nashik'),
+('Rohan','Patel','Male','9876500005','rohan@gmail.com','Surat');
+
+------------------------------------------------
+
+-- BOOKINGS
+
+INSERT INTO Booking(customer_id,room_id,check_in,check_out,total_amount,booking_status)
+VALUES
+(1,2,'2026-07-28','2026-07-30',5000,'Confirmed'),
+(2,7,'2026-07-29','2026-08-02',18000,'Confirmed'),
+(3,9,'2026-07-30','2026-08-01',5000,'Completed'),
+(4,3,'2026-08-01','2026-08-04',13500,'Confirmed'),
+(5,10,'2026-08-05','2026-08-07',14000,'Cancelled');
+
+------------------------------------------------
+
+-- PAYMENTS
+
+INSERT INTO Payment(booking_id,payment_date,payment_method,amount,payment_status)
+VALUES
+(1,'2026-07-28','UPI',5000,'Paid'),
+(2,'2026-07-29','Card',18000,'Paid'),
+(3,'2026-07-30','Cash',5000,'Paid'),
+(4,'2026-08-01','UPI',13500,'Pending'),
+(5,'2026-08-05','Card',14000,'Pending');
+
+-- STAFF
+
+INSERT INTO Staff(hotel_id,first_name,last_name,designation,salary,phone)
+VALUES
+(1,'Suresh','Patil','Manager',55000,'9999000001'),
+(1,'Kiran','Shinde','Receptionist',30000,'9999000002'),
+(2,'Ajay','More','Manager',60000,'9999000003'),
+(2,'Pooja','Joshi','Receptionist',32000,'9999000004'),
+(3,'Vikas','Kale','Housekeeping',25000,'9999000005');
+
+
+--  practice
+-- SELECT * FROM Hotel;
+
+-- SELECT * FROM RoomType;
+
+-- SELECT * FROM Room;
+
+-- SELECT * FROM Customer;
+
+-- SELECT * FROM Booking;
+
+-- SELECT * FROM Payment;
+
+-- SELECT * FROM Staff;
